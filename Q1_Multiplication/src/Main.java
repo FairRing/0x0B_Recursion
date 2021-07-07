@@ -1,5 +1,7 @@
 import java.io.*;
 
+// 문제 풀이 참조 : https://onsil-thegreenhouse.github.io/programming/problem/2018/03/29/problem_math_power/
+
 public class Main {
     public static void main(String[] args) throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
