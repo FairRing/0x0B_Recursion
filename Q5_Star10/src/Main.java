@@ -7,7 +7,6 @@ public class Main {
         int K = (int)Math.cbrt((double)N);
 
 
-        System.out.print("*");
         scanner.close();
     }
 }
