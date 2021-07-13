@@ -1,42 +1,54 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    static char[][] map;
+
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int N = scanner.nextInt();
-        int K = (int)Math.cbrt((double)N);
 
+        map = new char[N][N];
 
+        star(0, 0, N, false);
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                sb.append(map[i][j]);
+            }
+            sb.append('\n');
+        }
+        System.out.print(sb);
         scanner.close();
     }
+
+    static void star(int x, int y, int N, boolean blank) {
+
+        if (blank) {
+            for (int i = x; i < x + N; i++) {
+                for (int j = y; j < y + N; j++) {
+                    map[i][j] = ' ';
+                }
+            }
+            return;
+        }
+
+        if (N == 1) {
+            map[x][y] = '*';
+            return;
+        }
+
+        int size = N / 3;
+        int count = 0;
+        for (int i = x; i < x + N; i += size) {
+            for (int j = y; j < y + N; j += size) {
+                count++;
+                if (count == 5) {
+                    star(i, j, size, true);
+                } else {
+                    star(i, j, size, false);
+                }
+            }
+        }
+    }
 }
-/*
-yx	00	01	02	03	04	05	06	07	08	09	10	11	12	13	14	15	16	17	18	19	20	21	22	23	24	25	26
-00	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-01	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*
-02	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-03	*	*	*				*	*	*	*	*	*				*	*	*	*	*	*				*	*	*
-04	*		*				*		*	*		*				*		*	*		*				*		*
-05	*	*	*				*	*	*	*	*	*				*	*	*	*	*	*				*	*	*
-06	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-07	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*
-08	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-09	*	*	*	*	*	*	*	*	*										*	*	*	*	*	*	*	*	*
-10	*		*	*		*	*		*										*		*	*		*	*		*
-11	*	*	*	*	*	*	*	*	*										*	*	*	*	*	*	*	*	*
-12	*	*	*				*	*	*										*	*	*				*	*	*
-13	*		*				*		*										*		*				*		*
-14	*	*	*				*	*	*										*	*	*				*	*	*
-15	*	*	*	*	*	*	*	*	*										*	*	*	*	*	*	*	*	*
-16	*		*	*		*	*		*										*		*	*		*	*		*
-17	*	*	*	*	*	*	*	*	*										*	*	*	*	*	*	*	*	*
-18	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-19	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*
-20	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-21	*	*	*				*	*	*	*	*	*				*	*	*	*	*	*				*	*	*
-22	*		*				*		*	*		*				*		*	*		*				*		*
-23	*	*	*				*	*	*	*	*	*				*	*	*	*	*	*				*	*	*
-24	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-25	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*	*		*
-26	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*
-*/
